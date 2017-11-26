@@ -23,7 +23,6 @@ public class JavaResteasyServerCodegen extends AbstractJavaJAXRSServerCodegen im
         outputFolder = "generated-code/JavaJaxRS-Resteasy";
         apiTemplateFiles.put("apiService.mustache", ".java");
         apiTemplateFiles.put("apiServiceImpl.mustache", ".java");
-        apiTemplateFiles.put("apiServiceFactory.mustache", ".java");
         apiTestTemplateFiles.clear(); // TODO: add test template
 
         // clear model and api doc template as AbstractJavaJAXRSServerCodegen
@@ -60,9 +59,7 @@ public class JavaResteasyServerCodegen extends AbstractJavaJAXRSServerCodegen im
             this.setGenerateJbossDeploymentDescriptor(generateJbossDeploymentDescriptorProp);
         }
         
-        writeOptional(outputFolder, new SupportingFile("pom.mustache", "", "pom.xml"));
-        writeOptional(outputFolder, new SupportingFile("gradle.mustache", "", "build.gradle"));
-        writeOptional(outputFolder, new SupportingFile("settingsGradle.mustache", "", "settings.gradle"));
+
         writeOptional(outputFolder, new SupportingFile("README.mustache", "", "README.md"));
         supportingFiles.add(new SupportingFile("ApiException.mustache",
                 (sourceFolder + '/' + apiPackage).replace(".", "/"), "ApiException.java"));
@@ -70,18 +67,7 @@ public class JavaResteasyServerCodegen extends AbstractJavaJAXRSServerCodegen im
                 (sourceFolder + '/' + apiPackage).replace(".", "/"), "ApiOriginFilter.java"));
         supportingFiles.add(new SupportingFile("ApiResponseMessage.mustache",
                 (sourceFolder + '/' + apiPackage).replace(".", "/"), "ApiResponseMessage.java"));
-        supportingFiles.add(new SupportingFile("NotFoundException.mustache",
-                (sourceFolder + '/' + apiPackage).replace(".", "/"), "NotFoundException.java"));
-        writeOptional(outputFolder, new SupportingFile("web.mustache",
-                ("src/main/webapp/WEB-INF"), "web.xml"));
 
-        if (generateJbossDeploymentDescriptor) {
-            writeOptional(outputFolder, new SupportingFile("jboss-web.mustache",
-                ("src/main/webapp/WEB-INF"), "jboss-web.xml"));
-        }
-
-        writeOptional(outputFolder, new SupportingFile("RestApplication.mustache",
-                (sourceFolder + '/' + invokerPackage).replace(".", "/"), "RestApplication.java"));
         supportingFiles.add(new SupportingFile("StringUtil.mustache",
                 (sourceFolder + '/' + invokerPackage).replace(".", "/"), "StringUtil.java"));
         supportingFiles.add(new SupportingFile("JacksonConfig.mustache",
