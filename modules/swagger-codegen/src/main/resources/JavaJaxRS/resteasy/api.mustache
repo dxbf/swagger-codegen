@@ -19,6 +19,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.*;
+import org.springframework.stereotype.Service;
 {{#useBeanValidation}}
 import javax.validation.constraints.*;
 {{/useBeanValidation}}
@@ -30,6 +31,7 @@ import javax.validation.constraints.*;
 @io.swagger.annotations.Api(description = "the {{{baseName}}} API")
 {{>generatedAnnotation}}
 {{#operations}}
+@Service
 public class {{classname}}  {
    @Resource
    private {{classname}}Service delegate;

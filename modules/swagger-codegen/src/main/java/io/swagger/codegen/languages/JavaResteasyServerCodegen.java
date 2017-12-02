@@ -90,6 +90,11 @@ public class JavaResteasyServerCodegen extends AbstractJavaJAXRSServerCodegen im
 
     @Override
     public void addOperationToGroup(String tag, String resourcePath, Operation operation, CodegenOperation co, Map<String, List<CodegenOperation>> operations) {
+        super.addOperationToGroup(tag, resourcePath, operation, co, operations);
+        co.subresourceOperation = !co.path.isEmpty();
+    }
+    /*
+    public void addOperationToGroup(String tag, String resourcePath, Operation operation, CodegenOperation co, Map<String, List<CodegenOperation>> operations) {
         String basePath = resourcePath;
         if (basePath.startsWith("/")) {
             basePath = basePath.substring(1);
@@ -115,6 +120,7 @@ public class JavaResteasyServerCodegen extends AbstractJavaJAXRSServerCodegen im
         opList.add(co);
         co.baseName = basePath;
     }
+    */
 
     @Override
     public Map<String, Object> postProcessOperations(Map<String, Object> objs) {
